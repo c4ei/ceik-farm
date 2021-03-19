@@ -2,10 +2,10 @@ pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-import "./CakeToken.sol";
+import "./FinixToken.sol";
 
-// SyrupBar with Governance.
-contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
+// FlameKeeper  with Governance.
+contract FlameKeeper is BEP20('FlameKeeper', 'FLAME') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -17,23 +17,23 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
         _moveDelegates(_delegates[_from], address(0), _amount);
     }
 
-    // The CAKE TOKEN!
-    CakeToken public cake;
+    // The FINIX TOKEN!
+    FinixToken public finix;
 
 
     constructor(
-        CakeToken _cake
+        FinixToken _finix
     ) public {
-        cake = _cake;
+        finix = _finix;
     }
 
-    // Safe cake transfer function, just in case if rounding error causes pool to not have enough CAKEs.
-    function safeCakeTransfer(address _to, uint256 _amount) public onlyOwner {
-        uint256 cakeBal = cake.balanceOf(address(this));
-        if (_amount > cakeBal) {
-            cake.transfer(_to, cakeBal);
+    // Safe finix transfer function, just in case if rounding error causes pool to not have enough CAKEs.
+    function safeFinixTransfer(address _to, uint256 _amount) public onlyOwner {
+        uint256 finixBal = finix.balanceOf(address(this));
+        if (_amount > finixBal) {
+            finix.transfer(_to, finixBal);
         } else {
-            cake.transfer(_to, _amount);
+            finix.transfer(_to, _amount);
         }
     }
 
@@ -43,10 +43,8 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
     // Which is copied and modified from COMPOUND:
     // https://github.com/compound-finance/compound-protocol/blob/master/contracts/Governance/Comp.sol
 
-    /// @notice A record of each accounts delegate
     mapping (address => address) internal _delegates;
 
-    /// @notice A checkpoint for marking number of votes from a given block
     struct Checkpoint {
         uint32 fromBlock;
         uint256 votes;
