@@ -1,6 +1,6 @@
 pragma solidity 0.6.12;
 
-import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
+import "./pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
 // FinixToken with Governance.
 contract FinixToken is BEP20('Definix Token', 'FINIX') {
