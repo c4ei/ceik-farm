@@ -285,8 +285,12 @@ contract Herodotus is Ownable {
         UserInfo storage user = userInfo[_pid][msg.sender];
         pool.lpToken.safeTransfer(address(msg.sender), user.amount);
         emit EmergencyWithdraw(msg.sender, _pid, user.amount);
+        if(_pid == 0) {
+            flame.burn(msg.sender, user.amount);
+        }
         user.amount = 0;
         user.rewardDebt = 0;
+        
     }
 
     // Safe finix transfer function, just in case if rounding error causes pool to not have enough FINIXs.
