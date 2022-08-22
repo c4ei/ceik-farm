@@ -3,7 +3,7 @@ pragma solidity 0.6.12;
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
 // FinixToken with Governance.
-contract FinixToken is BEP20('Definix Token', 'FINIX') {
+contract FiceikToken is BEP20('Deficeik Token', 'FICEIK') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -110,9 +110,9 @@ contract FinixToken is BEP20('Definix Token', 'FINIX') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "FINIX::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "FINIX::delegateBySig: invalid nonce");
-        require(now <= expiry, "FINIX::delegateBySig: signature expired");
+        require(signatory != address(0), "FICEIK::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "FICEIK::delegateBySig: invalid nonce");
+        require(now <= expiry, "FICEIK::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -142,7 +142,7 @@ contract FinixToken is BEP20('Definix Token', 'FINIX') {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "FINIX::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "FICEIK::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -215,7 +215,7 @@ contract FinixToken is BEP20('Definix Token', 'FINIX') {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "FINIX::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "FICEIK::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;

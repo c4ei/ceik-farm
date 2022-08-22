@@ -1,3 +1,3 @@
-# Definix Farming 🥞
+# Deficeik Farming 🥞
 
 Comming Soon

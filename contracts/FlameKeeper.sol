@@ -2,7 +2,7 @@ pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-import "./FinixToken.sol";
+import "./FiceikToken.sol";
 
 // FlameKeeper  with Governance.
 contract FlameKeeper is BEP20('FlameKeeper', 'FLAME') {
@@ -17,12 +17,12 @@ contract FlameKeeper is BEP20('FlameKeeper', 'FLAME') {
         _moveDelegates(_delegates[_from], address(0), _amount);
     }
 
-    // The FINIX TOKEN!
-    FinixToken public finix;
+    // The FICEIK TOKEN!
+    FiceikToken public finix;
 
 
     constructor(
-        FinixToken _finix
+        FiceikToken _finix
     ) public {
         finix = _finix;
     }

@@ -5,7 +5,7 @@ import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
 import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol';
 import '@pancakeswap/pancake-swap-lib/contracts/access/Ownable.sol';
 
-import "./FinixToken.sol";
+import "./FiceikToken.sol";
 import "./FlameKeeper.sol";
 
 
@@ -44,13 +44,13 @@ contract Herodotus is Ownable {
         uint256 accFinixPerShare; // Accumulated FINIXs per share, times 1e12. See below.
     }
 
-    // The FINIX TOKEN!
-    FinixToken public finix;
+    // The FICEIK TOKEN!
+    FiceikToken public finix;
     // The FLAME TOKEN!
     FlameKeeper public flame;
     // Dev address.
     address public devaddr;
-    // FINIX tokens created per block.
+    // FICEIK tokens created per block.
     uint256 public finixPerBlock;
     // Bonus muliplier for early finix makers.
     uint256 public BONUS_MULTIPLIER = 1;
@@ -63,7 +63,7 @@ contract Herodotus is Ownable {
     mapping (uint256 => mapping (address => UserInfo)) public userInfo;
     // Total allocation points. Must be the sum of all allocation points in all pools.
     uint256 public totalAllocPoint = 0;
-    // The block number when FINIX mining starts.
+    // The block number when FICEIK mining starts.
     uint256 public startBlock;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
@@ -71,7 +71,7 @@ contract Herodotus is Ownable {
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
 
     constructor(
-        FinixToken _finix,
+        FiceikToken _finix,
         FlameKeeper _flame,
         address _devaddr,
         uint256 _finixPerBlock,
@@ -119,7 +119,7 @@ contract Herodotus is Ownable {
         }));
     }
 
-    // Update the given pool's FINIX allocation point. Can only be called by the owner.
+    // Update the given pool's FICEIK allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
         if (_withUpdate) {
             massUpdatePools();
@@ -195,10 +195,10 @@ contract Herodotus is Ownable {
         pool.lastRewardBlock = block.number;
     }
 
-    // Deposit LP tokens to Herodotus for FINIX allocation.
+    // Deposit LP tokens to Herodotus for FICEIK allocation.
     function deposit(uint256 _pid, uint256 _amount) public {
 
-        require (_pid != 0, 'deposit FINIX by staking');
+        require (_pid != 0, 'deposit FICEIK by staking');
 
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -220,7 +220,7 @@ contract Herodotus is Ownable {
     // Withdraw LP tokens from Herodotus.
     function withdraw(uint256 _pid, uint256 _amount) public {
 
-        require (_pid != 0, 'withdraw FINIX by unstaking');
+        require (_pid != 0, 'withdraw FICEIK by unstaking');
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
@@ -238,7 +238,7 @@ contract Herodotus is Ownable {
         emit Withdraw(msg.sender, _pid, _amount);
     }
 
-    // Stake FINIX tokens to Herodotus
+    // Stake FICEIK tokens to Herodotus
     function enterStaking(uint256 _amount) public {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
@@ -259,7 +259,7 @@ contract Herodotus is Ownable {
         emit Deposit(msg.sender, 0, _amount);
     }
 
-    // Withdraw FINIX tokens from STAKING.
+    // Withdraw FICEIK tokens from STAKING.
     function leaveStaking(uint256 _amount) public {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
